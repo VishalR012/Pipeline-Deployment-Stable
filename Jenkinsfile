@@ -124,18 +124,20 @@ pipeline {
 
         stage('Approval') {
             steps {
-                // Get user approval for the usage of methods and classes
-                    def userInput = input(
-                        id: 'method-usage-approval',
-                        message: 'Approval Required: The pipeline is using restricted methods and classes. Do you approve?',
-                        parameters: [
-                            string(defaultValue: 'yes', description: 'Type "yes" to approve:', name: 'approval')
-                        ]
-                    )
+                    script {
+                        // Get user approval for the usage of methods and classes
+                        def userInput = input(
+                            id: 'method-usage-approval',
+                            message: 'Approval Required: The pipeline is using restricted methods and classes. Do you approve?',
+                            parameters: [
+                                string(defaultValue: 'yes', description: 'Type "yes" to approve:', name: 'approval')
+                            ]
+                        )
 
-                    // Check user input for approval
-                    if (userInput.approval.trim().toLowerCase() != 'yes') {
-                        error("Approval not granted. Pipeline will not proceed.")
+                        // Check user input for approval
+                        if (userInput.approval.trim().toLowerCase() != 'yes') {
+                            error("Approval not granted. Pipeline will not proceed.")
+                        }
                     }
                 }
         }
