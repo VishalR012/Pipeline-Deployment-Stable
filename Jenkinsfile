@@ -133,27 +133,9 @@ pipeline {
                     println("Final included files: " + includedfile)
                     println("Filenames processed successfully... Moving to zipping..")
 
-                    if(tenant=="DS"){
-                        tenantstobeexcluded=['FS','PROD']
-                    }
-                    else if(tenant=="FS"){
-                        tenantstobeexcluded=['DS','PROD']
-                    }
-                    else{
-                        tenantstobeexcluded=['FS','DS']
-                    }
-
-
-                    /*bat """
+                    bat """
                     powershell.exe -Command "if (Test-Path '${path_zipfile}') { Remove-Item '${path_zipfile}' }"
                     powershell.exe -Command "Compress-Archive -Path @(${includedfile}) -DestinationPath '${path_zipfile}'"
-                    """*/
-                    // Convert the array to a comma-separated string to pass as an environment variable
-                    def excludedFoldersArgs = tenantstobeexcluded.collect { "'${it}'" }.join(',')
-
-                    bat """
-                        powershell.exe -Command "if (Test-Path '${path_zipfile}') { Remove-Item '${path_zipfile}' }"
-                        powershell.exe -Command "Compress-Archive -Path @(Get-ChildItem '${includedfile}' | Where-Object { \\$_.Name -NotIn @(${excludedFoldersArgs}) }) -DestinationPath '${path_zipfile}'"
                     """
                     if (!fileExists(path_zipfile)) {
                         error("Failed to create the zip file.")
@@ -163,7 +145,6 @@ pipeline {
                 }
             }
         }
-        /*
         stage('Prepare Upload') {
             steps {
                 script {
@@ -311,7 +292,6 @@ pipeline {
                 }
             }
         }
-         */
 
     }
 }
