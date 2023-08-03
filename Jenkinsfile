@@ -81,6 +81,67 @@ pipeline {
     agent any
 
     stages {
+
+        stage('Approval') {
+            steps {
+                // Define a map of methods and classes that require approval
+                def methodsToApprove = [
+                    'groovy.json.JsonSlurper parse java.io.File',
+                    'groovy.json.JsonSlurperClassic parse java.io.File',
+                    'java.io.BufferedReader readLine',
+                    'java.io.File delete',
+                    'java.io.File exists',
+                    'java.io.File getName',
+                    'java.io.File toURI',
+                    'java.io.OutputStream write byte[]',
+                    'java.lang.ProcessBuilder redirectErrorStream boolean',
+                    'java.lang.ProcessBuilder start',
+                    'java.net.HttpURLConnection disconnect',
+                    'java.net.HttpURLConnection getResponseCode',
+                    'java.net.HttpURLConnection setRequestMethod java.lang.String',
+                    'java.net.URL openConnection',
+                    'java.net.URLConnection connect',
+                    'java.net.URLConnection getInputStream',
+                    'java.net.URLConnection getOutputStream',
+                    'java.net.URLConnection setDoOutput boolean',
+                    'java.net.URLConnection setRequestProperty java.lang.String java.lang.String',
+                    'java.util.Collection toArray java.lang.Object[]',
+                    'java.util.zip.ZipOutputStream closeEntry',
+                    'java.util.zip.ZipOutputStream putNextEntry java.util.zip.ZipEntry',
+                    'new groovy.json.JsonSlurperClassic',
+                    'new java.io.BufferedReader java.io.Reader',
+                    'new java.io.File java.lang.String',
+                    'new java.io.FileOutputStream java.lang.String',
+                    'new java.io.InputStreamReader java.io.InputStream',
+                    'new java.io.OutputStreamWriter java.io.OutputStream',
+                    'new java.lang.ProcessBuilder java.lang.String[]',
+                    'new java.lang.ProcessBuilder java.util.List',
+                    'new java.util.zip.ZipEntry java.lang.String',
+                    'new java.util.zip.ZipOutputStream java.io.OutputStream',
+                    'staticField java.net.HttpURLConnection HTTP_OK',
+                    'staticMethod java.nio.file.Files readAllBytes java.nio.file.Path',
+                    'staticMethod java.nio.file.Paths get java.net.URI',
+                    'staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods getText java.io.InputStream',
+                    'staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods inspect java.lang.Object'
+                ]
+
+                // Get user approval for the usage of methods and classes
+                script {
+                    def userInput = input(
+                        id: 'method-usage-approval',
+                        message: 'Approval Required: The pipeline is using restricted methods and classes. Do you approve?',
+                        parameters: [
+                            [$class: 'TextParameterDefinition', defaultValue: 'yes', description: 'Type "yes" to approve:', name: 'approval']
+                        ]
+                    )
+
+                    // Check user input for approval
+                    if (userInput.approval.trim().toLowerCase() != 'yes') {
+                        error("Approval not granted. Pipeline will not proceed.")
+                    }
+                }
+            }
+        }        
         stage('Path Variables Initialization') {
             steps {
                 script {
