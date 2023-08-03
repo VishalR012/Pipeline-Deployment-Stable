@@ -125,12 +125,11 @@ pipeline {
         stage('Approval') {
             steps {
                 // Get user approval for the usage of methods and classes
-                script {
                     def userInput = input(
                         id: 'method-usage-approval',
                         message: 'Approval Required: The pipeline is using restricted methods and classes. Do you approve?',
                         parameters: [
-                            [$class: 'TextParameterDefinition', defaultValue: 'yes', description: 'Type "yes" to approve:', name: 'approval']
+                            string(defaultValue: 'yes', description: 'Type "yes" to approve:', name: 'approval')
                         ]
                     )
 
