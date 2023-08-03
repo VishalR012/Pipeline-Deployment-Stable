@@ -138,8 +138,8 @@ pipeline {
                         error("Approval not granted. Pipeline will not proceed.")
                     }
                 }
-            }
-        }        
+        }
+                
         stage('Path Variables Initialization') {
             steps {
                 script {
