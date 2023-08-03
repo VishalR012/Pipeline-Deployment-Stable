@@ -135,8 +135,10 @@ pipeline {
                         )
 
                         // Check user input for approval
-                        if (userInput.approval.trim().toLowerCase() != 'yes') {
+                        if (userInput.trim().toLowerCase() != 'yes') {
                             error("Approval not granted. Pipeline will not proceed.")
+                        } else {
+                            approve true // Approve the pipeline if the user input is 'yes'
                         }
                     }
                 }
