@@ -201,7 +201,7 @@ pipeline {
                 }
             }
         }
-        /*stage('Prepare Upload') {
+        stage('Prepare Upload') {
             steps {
                 script {
                     def jsonobject = "{\"binaryStreamObject\":{\"id\":\"guid\",\"type\":\"seedDataStream\",\"properties\":{\"objectKey\":\"${NAME_ZIPFILE}\",\"originalFileName\":\"${NAME_ZIPFILE}\"}}}"
@@ -245,7 +245,7 @@ pipeline {
             }
         }
 
-        stage('Deploy Files') {
+        /*stage('Deploy Files') {
             steps {
                 script {
                     echo "==== Deploying folder ===="
