@@ -83,7 +83,7 @@ pipeline {
 
     stages {
 
-        stage('Approving Scripts'){
+        /*stage('Approving Scripts'){
             steps{
                 script{
                     def scriptApproval = org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval.get()
@@ -135,7 +135,7 @@ pipeline {
                     scriptApproval.save()
                 }
             }
-        }
+        }*/
                 
         stage('Path Variables Initialization') {
             steps {
@@ -201,7 +201,7 @@ pipeline {
                 }
             }
         }
-        stage('Prepare Upload') {
+        /*stage('Prepare Upload') {
             steps {
                 script {
                     def jsonobject = "{\"binaryStreamObject\":{\"id\":\"guid\",\"type\":\"seedDataStream\",\"properties\":{\"objectKey\":\"${NAME_ZIPFILE}\",\"originalFileName\":\"${NAME_ZIPFILE}\"}}}"
@@ -347,7 +347,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
 
     }
 }
