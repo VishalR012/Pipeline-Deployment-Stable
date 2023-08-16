@@ -245,7 +245,7 @@ pipeline {
             }
         }
 
-        /*stage('Deploy Files') {
+        stage('Deploy Files') {
             steps {
                 script {
                     echo "==== Deploying folder ===="
@@ -270,7 +270,7 @@ pipeline {
             }
         }
 
-        stage('Upload to Tenant'){
+        /*stage('Upload to Tenant'){
                 steps{
                     script{
                         echo "====Deployment====="
