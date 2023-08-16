@@ -270,7 +270,7 @@ pipeline {
             }
         }
 
-        /*stage('Upload to Tenant'){
+        stage('Upload to Tenant'){
                 steps{
                     script{
                         echo "====Deployment====="
@@ -310,7 +310,7 @@ pipeline {
                     }    
             }
         }
-        
+        /*
         stage('Verify Upload') {
             steps {
                 script {
