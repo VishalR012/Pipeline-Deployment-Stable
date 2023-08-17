@@ -310,7 +310,7 @@ pipeline {
                     }    
             }
         }
-        /*
+        
         stage('Verify Upload') {
             steps {
                 script {
@@ -347,7 +347,7 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
 
     }
 }
