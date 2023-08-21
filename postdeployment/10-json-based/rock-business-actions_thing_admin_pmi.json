@@ -1,0 +1,984 @@
+{
+  "metaInfo": {
+    "dataIndex": "config",
+    "collectionName": "configObjects",
+    "responseObjectName": "response"
+  },
+  "configObjects": [
+    {
+      "id": "rock-business-actions_thing_admin_pmiproduct_uiConfig",
+      "name": "rock-business-actions_thing_admin_pmiproduct",
+      "type": "uiConfig",
+      "properties": {},
+      "data": {
+        "contexts": [
+          {
+            "context": {
+              "component": "rock-business-actions",
+              "app": "_DEFAULT",
+              "domain": "thing",
+              "entityType": "pmiproduct",
+              "relationship": "_DEFAULT",
+              "role": "admin"
+            },
+            "jsonData": {
+              "config": {
+                "actionGroups": {
+                  "connectors": {
+                    "visible": false,
+                    "title": "{[BAConTit]}",
+                    "actions": {
+                      "re-publish": {
+                        "visible": true,
+                        "name": "re-publish",
+                        "icon": "pebble-icon:send",
+                        "eventName": "action-re-publish",
+                        "text": "{[PubTxt]}",
+                        "componentName": "rock-wizard-re-publish",
+                        "intent": "read",
+                        "subComponentName": "re-publish"
+                      },
+                      "syndication-actions": {
+                        "visible": false,
+                        "maxAllowedEntities": 20,
+                        "name": "syndication-actions",
+                        "icon": "pebble-icon:send",
+                        "eventName": "action-syndication",
+                        "text": "{[SynToChlsTxt]}",
+                        "componentName": "rock-wizard-syndication-actions",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "assignments": {
+                    "visible": false,
+                    "isWorkflowActions": true,
+                    "title": "{[BAAssTit]}",
+                    "actions": {
+                      "reassignTask": {
+                        "visible": true,
+                        "name": "reassignTask",
+                        "icon": "pebble-icon:reassign-task",
+                        "eventName": "action-reassignTask",
+                        "text": "{[RsgTskTxt]}",
+                        "componentName": "rock-wizard-workflow-assignment",
+                        "intent": "read"
+                      },
+                      "releaseTask": {
+                        "visible": true,
+                        "name": "releaseTask",
+                        "icon": "pebble-icon:release-task",
+                        "eventName": "action-releaseTask",
+                        "text": "{[RlsTskTxt]}",
+                        "componentName": "rock-wizard-workflow-assignment",
+                        "intent": "read"
+                      },
+                      "takeTask": {
+                        "visible": true,
+                        "name": "takeTask",
+                        "icon": "pebble-icon:take-task",
+                        "eventName": "action-takeTask",
+                        "text": "{[TakTskTxt]}",
+                        "componentName": "rock-wizard-workflow-assignment",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "reviews": {
+                    "visible": false,
+                    "title": "{[BARevLbl]}",
+                    "actions": {
+                      "matchandmerge": {
+                        "dataRoute": "match-merge",
+                        "visible": false,
+                        "displaySequence": 10,
+                        "name": "matchandmerge",
+                        "icon": "pebble-icon:merge",
+                        "eventName": "action-matchandmerge",
+                        "threshold": 20,
+                        "text": "{[GolRecRevTxt]}",
+                        "intent": "read"
+                      },
+                      "processsourcerecord": {
+                        "visible": false,
+                        "displaySequence": 30,
+                        "name": "processsourcerecord",
+                        "icon": "pebble-icon:process-sr",
+                        "eventName": "action-process-grm",
+                        "threshold": 20,
+                        "text": "{[IntGrmTit]}",
+                        "componentName": "rock-wizard-process-grm",
+                        "intent": "write"
+                      },
+                      "processgoldenrecord": {
+                        "visible": false,
+                        "displaySequence": 20,
+                        "name": "processgoldenrecord",
+                        "icon": "pebble-icon:process-gr",
+                        "eventName": "action-process-grm",
+                        "threshold": 20,
+                        "text": "{[ComGolRecTit]}",
+                        "componentName": "rock-wizard-process-grm",
+                        "intent": "write"
+                      }
+                    }
+                  },
+                  "downloads": {
+                    "visible": false,
+                    "title": "{[BADwnTit]}",
+                    "actions": {
+                      "download-in-excel": {
+                        "visible": true,
+                        "cop-context": {
+                          "subtype": "User",
+                          "service": "ENTITY_EXPORT",
+                          "channel": "UI",
+                          "format": "Excel",
+                          "source": "internal",
+                          "order": 10
+                        },
+                        "name": "download in Excel",
+                        "icon": "pebble-icon:download-excel",
+                        "eventName": "action-download",
+                        "text": "{[BADELbl]}",
+                        "componentName": "rock-wizard-entity-download",
+                        "intent": "read"
+                      },
+                      "download-in-csv": {
+                        "visible": true,
+                        "cop-context": {
+                          "subtype": "User",
+                          "service": "ENTITY_EXPORT",
+                          "channel": "UI",
+                          "format": "DSV",
+                          "source": "internal",
+                          "order": 10
+                        },
+                        "name": "download in CSV",
+                        "icon": "pebble-icon:text",
+                        "eventName": "action-download",
+                        "text": "{[BADCLbl]}",
+                        "componentName": "rock-wizard-entity-download",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "context": {
+                    "visible": true,
+                    "title": "{[BACMTit]}",
+                    "actions": {
+                      "add-context": {
+                        "visible": true,
+                        "name": "add-context",
+                        "icon": "pebble-icon:globe",
+                        "eventName": "action-add-context",
+                        "text": "{[MngCtxTxt]}",
+                        "componentName": "rock-wizard-entity-context-manage",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "DnB": {
+                    "visible": false,
+                    "title": "DnB",
+                    "actions": {
+                      "dnbidentification": {
+                        "visible": false,
+                        "displaySequence": 30,
+                        "name": "dnbidentification",
+                        "icon": "pebble-icon:dots-group",
+                        "eventName": "action-process-grm",
+                        "threshold": 20,
+                        "text": "{[DNBIdeTit]}",
+                        "componentName": "rock-wizard-process-grm",
+                        "intent": "write"
+                      }
+                    }
+                  },
+                  "variants": {
+                    "visible": false,
+                    "title": "{[BAVarTit]}",
+                    "actions": {
+                      "variant-configurator": {
+                        "dataRoute": "variant-configurator",
+                        "visible": false,
+                        "dockingPoint": "entity-detail-tabs",
+                        "openContentInFullMode": true,
+                        "name": "variant",
+                        "icon": "pebble-icon:variants-circle-filled",
+                        "eventName": "action-variant-configurator",
+                        "text": "{[BAVCLbl]}",
+                        "intent": "write"
+                      }
+                    }
+                  },
+                  "basic": {
+                    "visible": true,
+                    "title": "{[BABasTit]}",
+                    "actions": {
+                      "snapshots": {
+                        "visible": false,
+                        "name": "snapshots",
+                        "icon": "pebble-icon:history",
+                        "eventName": "action-view-snapshot",
+                        "text": "{[VerTxt]}",
+                        "componentName": "rock-wizard-entity-snapshot",
+                        "intent": "read",
+                        "properties": {
+                          "context": {
+                            "entityType": ""
+                          }
+                        }
+                      },
+                      "compare": {
+                        "dataRoute": "compare-entities",
+                        "visible": true,
+                        "name": "compare",
+                        "icon": "pebble-icon:compare",
+                        "eventName": "action-compare-entities",
+                        "threshold": 5,
+                        "text": "{[CmpTxt]}",
+                        "intent": "read"
+                      },
+                      "clone": {
+                        "visible": true,
+                        "name": "clone",
+                        "icon": "pebble-icon:action-clone",
+                        "eventName": "action-clone",
+                        "text": "{[ClnTxt]}",
+                        "componentName": "rock-wizard-entity-clone",
+                        "intent": "write"
+                      },
+                      "copy": {
+                        "visible": true,
+                        "name": "copy",
+                        "icon": "pebble-icon:copy",
+                        "eventName": "action-copy",
+                        "text": "{[BACopLbl]}",
+                        "intent": "read"
+                      },
+                      "paste": {
+                        "visible": true,
+                        "name": "paste",
+                        "icon": "pebble-icon:paste",
+                        "eventName": "action-paste",
+                        "text": "{[PasTxt]}",
+                        "componentName": "rock-wizard-entity-paste",
+                        "intent": "write"
+                      },
+                      "roll-up": {
+                        "visible": false,
+                        "name": "roll-up",
+                        "icon": "pebble-icon:dots-group",
+                        "eventName": "action-rollup",
+                        "text": "{[BARULbl]}",
+                        "componentName": "rock-wizard-roll-up",
+                        "intent": "write",
+                        "properties": {
+                          "context": {
+                            "entityType": ""
+                          }
+                        },
+                        "subComponentName": "roll-up"
+                      }
+                    }
+                  },
+                  "transitions": {
+                    "visible": true,
+                    "isWorkflowActions": false,
+                    "title": "{[BATraLbl]}",
+                    "actions": {
+                      "wfTransition": {
+                        "visible": false,
+                        "name": "wfTransition",
+                        "icon": "pebble-icon:workflow-transition",
+                        "eventName": "action-wfTransitions",
+                        "text": "{[WfTraTxt]}",
+                        "componentName": "rock-wizard-workflow-transition",
+                        "intent": "read"
+                      },
+                      "initiateWorkflow": {
+                        "visible": true,
+                        "name": "initiateWorkflow",
+                        "icon": "pebble-icon:initiate-workflow",
+                        "eventName": "action-initiateWorkflow",
+                        "text": "{[IniWFBtnTxt]}",
+                        "componentName": "rock-wizard-initiate-workflow",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "uploads": {
+                    "visible": false,
+                    "title": "{[BAUplTit]}",
+                    "actions": {
+                      "upload-from-excel": {
+                        "visible": true,
+                        "name": "upload from Excel",
+                        "icon": "pebble-icon:upload-excel",
+                        "eventName": "action-upload",
+                        "text": "{[BAUELbl]}",
+                        "componentName": "rock-wizard-cloud-upload",
+                        "intent": "write"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "rock-business-actions_thing_admin_pmiproductmodel_uiConfig",
+      "name": "rock-business-actions_thing_admin_pmiproductmodel",
+      "type": "uiConfig",
+      "properties": {},
+      "data": {
+        "contexts": [
+          {
+            "context": {
+              "component": "rock-business-actions",
+              "app": "_DEFAULT",
+              "domain": "thing",
+              "entityType": "pmiproductmodel",
+              "relationship": "_DEFAULT",
+              "role": "admin"
+            },
+            "jsonData": {
+              "config": {
+                "actionGroups": {
+                  "connectors": {
+                    "visible": false,
+                    "title": "{[BAConTit]}",
+                    "actions": {
+                      "re-publish": {
+                        "visible": true,
+                        "name": "re-publish",
+                        "icon": "pebble-icon:send",
+                        "eventName": "action-re-publish",
+                        "text": "{[PubTxt]}",
+                        "componentName": "rock-wizard-re-publish",
+                        "intent": "read",
+                        "subComponentName": "re-publish"
+                      },
+                      "syndication-actions": {
+                        "visible": false,
+                        "maxAllowedEntities": 20,
+                        "name": "syndication-actions",
+                        "icon": "pebble-icon:send",
+                        "eventName": "action-syndication",
+                        "text": "{[SynToChlsTxt]}",
+                        "componentName": "rock-wizard-syndication-actions",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "assignments": {
+                    "visible": false,
+                    "isWorkflowActions": true,
+                    "title": "{[BAAssTit]}",
+                    "actions": {
+                      "reassignTask": {
+                        "visible": true,
+                        "name": "reassignTask",
+                        "icon": "pebble-icon:reassign-task",
+                        "eventName": "action-reassignTask",
+                        "text": "{[RsgTskTxt]}",
+                        "componentName": "rock-wizard-workflow-assignment",
+                        "intent": "read"
+                      },
+                      "releaseTask": {
+                        "visible": true,
+                        "name": "releaseTask",
+                        "icon": "pebble-icon:release-task",
+                        "eventName": "action-releaseTask",
+                        "text": "{[RlsTskTxt]}",
+                        "componentName": "rock-wizard-workflow-assignment",
+                        "intent": "read"
+                      },
+                      "takeTask": {
+                        "visible": true,
+                        "name": "takeTask",
+                        "icon": "pebble-icon:take-task",
+                        "eventName": "action-takeTask",
+                        "text": "{[TakTskTxt]}",
+                        "componentName": "rock-wizard-workflow-assignment",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "reviews": {
+                    "visible": false,
+                    "title": "{[BARevLbl]}",
+                    "actions": {
+                      "matchandmerge": {
+                        "dataRoute": "match-merge",
+                        "visible": false,
+                        "displaySequence": 10,
+                        "name": "matchandmerge",
+                        "icon": "pebble-icon:merge",
+                        "eventName": "action-matchandmerge",
+                        "threshold": 20,
+                        "text": "{[GolRecRevTxt]}",
+                        "intent": "read"
+                      },
+                      "processsourcerecord": {
+                        "visible": false,
+                        "displaySequence": 30,
+                        "name": "processsourcerecord",
+                        "icon": "pebble-icon:process-sr",
+                        "eventName": "action-process-grm",
+                        "threshold": 20,
+                        "text": "{[IntGrmTit]}",
+                        "componentName": "rock-wizard-process-grm",
+                        "intent": "write"
+                      },
+                      "processgoldenrecord": {
+                        "visible": false,
+                        "displaySequence": 20,
+                        "name": "processgoldenrecord",
+                        "icon": "pebble-icon:process-gr",
+                        "eventName": "action-process-grm",
+                        "threshold": 20,
+                        "text": "{[ComGolRecTit]}",
+                        "componentName": "rock-wizard-process-grm",
+                        "intent": "write"
+                      }
+                    }
+                  },
+                  "downloads": {
+                    "visible": false,
+                    "title": "{[BADwnTit]}",
+                    "actions": {
+                      "download-in-excel": {
+                        "visible": true,
+                        "cop-context": {
+                          "subtype": "User",
+                          "service": "ENTITY_EXPORT",
+                          "channel": "UI",
+                          "format": "Excel",
+                          "source": "internal",
+                          "order": 10
+                        },
+                        "name": "download in Excel",
+                        "icon": "pebble-icon:download-excel",
+                        "eventName": "action-download",
+                        "text": "{[BADELbl]}",
+                        "componentName": "rock-wizard-entity-download",
+                        "intent": "read"
+                      },
+                      "download-in-csv": {
+                        "visible": true,
+                        "cop-context": {
+                          "subtype": "User",
+                          "service": "ENTITY_EXPORT",
+                          "channel": "UI",
+                          "format": "DSV",
+                          "source": "internal",
+                          "order": 10
+                        },
+                        "name": "download in CSV",
+                        "icon": "pebble-icon:text",
+                        "eventName": "action-download",
+                        "text": "{[BADCLbl]}",
+                        "componentName": "rock-wizard-entity-download",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "context": {
+                    "visible": true,
+                    "title": "{[BACMTit]}",
+                    "actions": {
+                      "add-context": {
+                        "visible": true,
+                        "name": "add-context",
+                        "icon": "pebble-icon:globe",
+                        "eventName": "action-add-context",
+                        "text": "{[MngCtxTxt]}",
+                        "componentName": "rock-wizard-entity-context-manage",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "DnB": {
+                    "visible": false,
+                    "title": "DnB",
+                    "actions": {
+                      "dnbidentification": {
+                        "visible": false,
+                        "displaySequence": 30,
+                        "name": "dnbidentification",
+                        "icon": "pebble-icon:dots-group",
+                        "eventName": "action-process-grm",
+                        "threshold": 20,
+                        "text": "{[DNBIdeTit]}",
+                        "componentName": "rock-wizard-process-grm",
+                        "intent": "write"
+                      }
+                    }
+                  },
+                  "variants": {
+                    "visible": false,
+                    "title": "{[BAVarTit]}",
+                    "actions": {
+                      "variant-configurator": {
+                        "dataRoute": "variant-configurator",
+                        "visible": false,
+                        "dockingPoint": "entity-detail-tabs",
+                        "openContentInFullMode": true,
+                        "name": "variant",
+                        "icon": "pebble-icon:variants-circle-filled",
+                        "eventName": "action-variant-configurator",
+                        "text": "{[BAVCLbl]}",
+                        "intent": "write"
+                      }
+                    }
+                  },
+                  "basic": {
+                    "visible": true,
+                    "title": "{[BABasTit]}",
+                    "actions": {
+                      "snapshots": {
+                        "visible": false,
+                        "name": "snapshots",
+                        "icon": "pebble-icon:history",
+                        "eventName": "action-view-snapshot",
+                        "text": "{[VerTxt]}",
+                        "componentName": "rock-wizard-entity-snapshot",
+                        "intent": "read",
+                        "properties": {
+                          "context": {
+                            "entityType": ""
+                          }
+                        }
+                      },
+                      "compare": {
+                        "dataRoute": "compare-entities",
+                        "visible": true,
+                        "name": "compare",
+                        "icon": "pebble-icon:compare",
+                        "eventName": "action-compare-entities",
+                        "threshold": 5,
+                        "text": "{[CmpTxt]}",
+                        "intent": "read"
+                      },
+                      "clone": {
+                        "visible": true,
+                        "name": "clone",
+                        "icon": "pebble-icon:action-clone",
+                        "eventName": "action-clone",
+                        "text": "{[ClnTxt]}",
+                        "componentName": "rock-wizard-entity-clone",
+                        "intent": "write"
+                      },
+                      "copy": {
+                        "visible": true,
+                        "name": "copy",
+                        "icon": "pebble-icon:copy",
+                        "eventName": "action-copy",
+                        "text": "{[BACopLbl]}",
+                        "intent": "read"
+                      },
+                      "paste": {
+                        "visible": true,
+                        "name": "paste",
+                        "icon": "pebble-icon:paste",
+                        "eventName": "action-paste",
+                        "text": "{[PasTxt]}",
+                        "componentName": "rock-wizard-entity-paste",
+                        "intent": "write"
+                      },
+                      "roll-up": {
+                        "visible": false,
+                        "name": "roll-up",
+                        "icon": "pebble-icon:dots-group",
+                        "eventName": "action-rollup",
+                        "text": "{[BARULbl]}",
+                        "componentName": "rock-wizard-roll-up",
+                        "intent": "write",
+                        "properties": {
+                          "context": {
+                            "entityType": ""
+                          }
+                        },
+                        "subComponentName": "roll-up"
+                      }
+                    }
+                  },
+                  "transitions": {
+                    "visible": true,
+                    "isWorkflowActions": false,
+                    "title": "{[BATraLbl]}",
+                    "actions": {
+                      "wfTransition": {
+                        "visible": false,
+                        "name": "wfTransition",
+                        "icon": "pebble-icon:workflow-transition",
+                        "eventName": "action-wfTransitions",
+                        "text": "{[WfTraTxt]}",
+                        "componentName": "rock-wizard-workflow-transition",
+                        "intent": "read"
+                      },
+                      "initiateWorkflow": {
+                        "visible": true,
+                        "name": "initiateWorkflow",
+                        "icon": "pebble-icon:initiate-workflow",
+                        "eventName": "action-initiateWorkflow",
+                        "text": "{[IniWFBtnTxt]}",
+                        "componentName": "rock-wizard-initiate-workflow",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "uploads": {
+                    "visible": false,
+                    "title": "{[BAUplTit]}",
+                    "actions": {
+                      "upload-from-excel": {
+                        "visible": true,
+                        "name": "upload from Excel",
+                        "icon": "pebble-icon:upload-excel",
+                        "eventName": "action-upload",
+                        "text": "{[BAUELbl]}",
+                        "componentName": "rock-wizard-cloud-upload",
+                        "intent": "write"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "rock-business-actions_thing_admin_pmiproduct_pmiproductmodel_uiConfig",
+      "name": "rock-business-actions_thing_admin_pmiproduct_pmiproductmodel",
+      "type": "uiConfig",
+      "properties": {},
+      "data": {
+        "contexts": [
+          {
+            "context": {
+              "component": "rock-business-actions",
+              "app": "_DEFAULT",
+              "domain": "thing",
+              "relationship": "_DEFAULT",
+              "role": "admin"
+            },
+            "jsonData": {
+              "config": {
+                "entityTypes": ["pmiproductmodel", "pmiproduct"],
+                "actionGroups": {
+                  "connectors": {
+                    "visible": false,
+                    "title": "{[BAConTit]}",
+                    "actions": {
+                      "re-publish": {
+                        "visible": true,
+                        "name": "re-publish",
+                        "icon": "pebble-icon:send",
+                        "eventName": "action-re-publish",
+                        "text": "{[PubTxt]}",
+                        "componentName": "rock-wizard-re-publish",
+                        "intent": "read",
+                        "subComponentName": "re-publish"
+                      },
+                      "syndication-actions": {
+                        "visible": false,
+                        "maxAllowedEntities": 20,
+                        "name": "syndication-actions",
+                        "icon": "pebble-icon:send",
+                        "eventName": "action-syndication",
+                        "text": "{[SynToChlsTxt]}",
+                        "componentName": "rock-wizard-syndication-actions",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "assignments": {
+                    "visible": false,
+                    "isWorkflowActions": true,
+                    "title": "{[BAAssTit]}",
+                    "actions": {
+                      "reassignTask": {
+                        "visible": true,
+                        "name": "reassignTask",
+                        "icon": "pebble-icon:reassign-task",
+                        "eventName": "action-reassignTask",
+                        "text": "{[RsgTskTxt]}",
+                        "componentName": "rock-wizard-workflow-assignment",
+                        "intent": "read"
+                      },
+                      "releaseTask": {
+                        "visible": true,
+                        "name": "releaseTask",
+                        "icon": "pebble-icon:release-task",
+                        "eventName": "action-releaseTask",
+                        "text": "{[RlsTskTxt]}",
+                        "componentName": "rock-wizard-workflow-assignment",
+                        "intent": "read"
+                      },
+                      "takeTask": {
+                        "visible": true,
+                        "name": "takeTask",
+                        "icon": "pebble-icon:take-task",
+                        "eventName": "action-takeTask",
+                        "text": "{[TakTskTxt]}",
+                        "componentName": "rock-wizard-workflow-assignment",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "reviews": {
+                    "visible": false,
+                    "title": "{[BARevLbl]}",
+                    "actions": {
+                      "matchandmerge": {
+                        "dataRoute": "match-merge",
+                        "visible": false,
+                        "displaySequence": 10,
+                        "name": "matchandmerge",
+                        "icon": "pebble-icon:merge",
+                        "eventName": "action-matchandmerge",
+                        "threshold": 20,
+                        "text": "{[GolRecRevTxt]}",
+                        "intent": "read"
+                      },
+                      "processsourcerecord": {
+                        "visible": false,
+                        "displaySequence": 30,
+                        "name": "processsourcerecord",
+                        "icon": "pebble-icon:process-sr",
+                        "eventName": "action-process-grm",
+                        "threshold": 20,
+                        "text": "{[IntGrmTit]}",
+                        "componentName": "rock-wizard-process-grm",
+                        "intent": "write"
+                      },
+                      "processgoldenrecord": {
+                        "visible": false,
+                        "displaySequence": 20,
+                        "name": "processgoldenrecord",
+                        "icon": "pebble-icon:process-gr",
+                        "eventName": "action-process-grm",
+                        "threshold": 20,
+                        "text": "{[ComGolRecTit]}",
+                        "componentName": "rock-wizard-process-grm",
+                        "intent": "write"
+                      }
+                    }
+                  },
+                  "downloads": {
+                    "visible": false,
+                    "title": "{[BADwnTit]}",
+                    "actions": {
+                      "download-in-excel": {
+                        "visible": true,
+                        "cop-context": {
+                          "subtype": "User",
+                          "service": "ENTITY_EXPORT",
+                          "channel": "UI",
+                          "format": "Excel",
+                          "source": "internal",
+                          "order": 10
+                        },
+                        "name": "download in Excel",
+                        "icon": "pebble-icon:download-excel",
+                        "eventName": "action-download",
+                        "text": "{[BADELbl]}",
+                        "componentName": "rock-wizard-entity-download",
+                        "intent": "read"
+                      },
+                      "download-in-csv": {
+                        "visible": true,
+                        "cop-context": {
+                          "subtype": "User",
+                          "service": "ENTITY_EXPORT",
+                          "channel": "UI",
+                          "format": "DSV",
+                          "source": "internal",
+                          "order": 10
+                        },
+                        "name": "download in CSV",
+                        "icon": "pebble-icon:text",
+                        "eventName": "action-download",
+                        "text": "{[BADCLbl]}",
+                        "componentName": "rock-wizard-entity-download",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "context": {
+                    "visible": true,
+                    "title": "{[BACMTit]}",
+                    "actions": {
+                      "add-context": {
+                        "visible": true,
+                        "name": "add-context",
+                        "icon": "pebble-icon:globe",
+                        "eventName": "action-add-context",
+                        "text": "{[MngCtxTxt]}",
+                        "componentName": "rock-wizard-entity-context-manage",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "DnB": {
+                    "visible": false,
+                    "title": "DnB",
+                    "actions": {
+                      "dnbidentification": {
+                        "visible": false,
+                        "displaySequence": 30,
+                        "name": "dnbidentification",
+                        "icon": "pebble-icon:dots-group",
+                        "eventName": "action-process-grm",
+                        "threshold": 20,
+                        "text": "{[DNBIdeTit]}",
+                        "componentName": "rock-wizard-process-grm",
+                        "intent": "write"
+                      }
+                    }
+                  },
+                  "variants": {
+                    "visible": false,
+                    "title": "{[BAVarTit]}",
+                    "actions": {
+                      "variant-configurator": {
+                        "dataRoute": "variant-configurator",
+                        "visible": false,
+                        "dockingPoint": "entity-detail-tabs",
+                        "openContentInFullMode": true,
+                        "name": "variant",
+                        "icon": "pebble-icon:variants-circle-filled",
+                        "eventName": "action-variant-configurator",
+                        "text": "{[BAVCLbl]}",
+                        "intent": "write"
+                      }
+                    }
+                  },
+                  "basic": {
+                    "visible": true,
+                    "title": "{[BABasTit]}",
+                    "actions": {
+                      "snapshots": {
+                        "visible": false,
+                        "name": "snapshots",
+                        "icon": "pebble-icon:history",
+                        "eventName": "action-view-snapshot",
+                        "text": "{[VerTxt]}",
+                        "componentName": "rock-wizard-entity-snapshot",
+                        "intent": "read",
+                        "properties": {
+                          "context": {
+                            "entityType": ""
+                          }
+                        }
+                      },
+                      "compare": {
+                        "dataRoute": "compare-entities",
+                        "visible": true,
+                        "name": "compare",
+                        "icon": "pebble-icon:compare",
+                        "eventName": "action-compare-entities",
+                        "threshold": 5,
+                        "text": "{[CmpTxt]}",
+                        "intent": "read"
+                      },
+                      "clone": {
+                        "visible": true,
+                        "name": "clone",
+                        "icon": "pebble-icon:action-clone",
+                        "eventName": "action-clone",
+                        "text": "{[ClnTxt]}",
+                        "componentName": "rock-wizard-entity-clone",
+                        "intent": "write"
+                      },
+                      "copy": {
+                        "visible": true,
+                        "name": "copy",
+                        "icon": "pebble-icon:copy",
+                        "eventName": "action-copy",
+                        "text": "{[BACopLbl]}",
+                        "intent": "read"
+                      },
+                      "paste": {
+                        "visible": true,
+                        "name": "paste",
+                        "icon": "pebble-icon:paste",
+                        "eventName": "action-paste",
+                        "text": "{[PasTxt]}",
+                        "componentName": "rock-wizard-entity-paste",
+                        "intent": "write"
+                      },
+                      "roll-up": {
+                        "visible": false,
+                        "name": "roll-up",
+                        "icon": "pebble-icon:dots-group",
+                        "eventName": "action-rollup",
+                        "text": "{[BARULbl]}",
+                        "componentName": "rock-wizard-roll-up",
+                        "intent": "write",
+                        "properties": {
+                          "context": {
+                            "entityType": ""
+                          }
+                        },
+                        "subComponentName": "roll-up"
+                      }
+                    }
+                  },
+                  "transitions": {
+                    "visible": true,
+                    "isWorkflowActions": false,
+                    "title": "{[BATraLbl]}",
+                    "actions": {
+                      "wfTransition": {
+                        "visible": false,
+                        "name": "wfTransition",
+                        "icon": "pebble-icon:workflow-transition",
+                        "eventName": "action-wfTransitions",
+                        "text": "{[WfTraTxt]}",
+                        "componentName": "rock-wizard-workflow-transition",
+                        "intent": "read"
+                      },
+                      "initiateWorkflow": {
+                        "visible": true,
+                        "name": "initiateWorkflow",
+                        "icon": "pebble-icon:initiate-workflow",
+                        "eventName": "action-initiateWorkflow",
+                        "text": "{[IniWFBtnTxt]}",
+                        "componentName": "rock-wizard-initiate-workflow",
+                        "intent": "read"
+                      }
+                    }
+                  },
+                  "uploads": {
+                    "visible": false,
+                    "title": "{[BAUplTit]}",
+                    "actions": {
+                      "upload-from-excel": {
+                        "visible": true,
+                        "name": "upload from Excel",
+                        "icon": "pebble-icon:upload-excel",
+                        "eventName": "action-upload",
+                        "text": "{[BAUELbl]}",
+                        "componentName": "rock-wizard-cloud-upload",
+                        "intent": "write"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

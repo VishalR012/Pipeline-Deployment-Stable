@@ -34,6 +34,13 @@ String includedfile = ""
 def tenant="DS"
 def tenantstobeexcluded
 
+def postdeployment_zipfile
+def path_postdeploymentfiles
+def path_postdeployment_zipfile
+String postdeploymentfile = ""
+def dopostdeployment = true
+
+
 
 @NonCPS
 def makeApiCallAndGetResponse(String taskID) {
@@ -82,75 +89,21 @@ pipeline {
     agent any
 
     stages {
-
-        /*stage('Approving Scripts'){
-            steps{
-                script{
-                    def scriptApproval = org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval.get()
-
-                    String[] signs = [
-                        'groovy.json.JsonSlurper parse java.io.File',
-                        'groovy.json.JsonSlurperClassic parse java.io.File',
-                        'java.io.BufferedReader readLine',
-                        'java.io.File delete',
-                        'java.io.File exists',
-                        'java.io.File getName',
-                        'java.io.File toURI',
-                        'java.io.OutputStream write byte[]',
-                        'java.lang.ProcessBuilder redirectErrorStream boolean',
-                        'java.lang.ProcessBuilder start',
-                        'java.net.HttpURLConnection disconnect',
-                        'java.net.HttpURLConnection getResponseCode',
-                        'java.net.HttpURLConnection setRequestMethod java.lang.String',
-                        'java.net.URL openConnection',
-                        'java.net.URLConnection connect',
-                        'java.net.URLConnection getInputStream',
-                        'java.net.URLConnection getOutputStream',
-                        'java.net.URLConnection setDoOutput boolean',
-                        'java.net.URLConnection setRequestProperty java.lang.String java.lang.String',
-                        'java.util.Collection toArray java.lang.Object[]',
-                        'java.util.zip.ZipOutputStream closeEntry',
-                        'java.util.zip.ZipOutputStream putNextEntry java.util.zip.ZipEntry',
-                        'new groovy.json.JsonSlurperClassic',
-                        'new java.io.BufferedReader java.io.Reader',
-                        'new java.io.File java.lang.String',
-                        'new java.io.FileOutputStream java.lang.String',
-                        'new java.io.InputStreamReader java.io.InputStream',
-                        'new java.io.OutputStreamWriter java.io.OutputStream',
-                        'new java.lang.ProcessBuilder java.lang.String[]',
-                        'new java.lang.ProcessBuilder java.util.List',
-                        'new java.util.zip.ZipEntry java.lang.String',
-                        'new java.util.zip.ZipOutputStream java.io.OutputStream',
-                        'staticField java.net.HttpURLConnection HTTP_OK',
-                        'staticMethod java.nio.file.Files readAllBytes java.nio.file.Path',
-                        'staticMethod java.nio.file.Paths get java.net.URI',
-                        'staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods getText java.io.InputStream',
-                        'staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods inspect java.lang.Object'
-                    ]
-
-                    for( String sign : signs ) {
-                        scriptApproval.approveSignature(sign)
-                    }
-
-                    scriptApproval.save()
-                }
-            }
-        }*/
                 
         stage('Path Variables Initialization') {
             steps {
                 script {
                     NAME_ZIPFILE = "${env.BRANCH_NAME}.zip"
-                    ZIP_WORKFLOW = "postdeployment.zip"
+                    postdeployment_zipfile = "postdeployment.zip"
                     path_filestobedeployed = "${env.WORKSPACE}/deployment-artifacts/filestobedeployed.json"
+                    path_postdeploymentfiles = "${env.WORKSPACE}/deployment-artifacts/postdeploymentconfig.json"
                     path_zipfile = "${env.WORKSPACE}/${NAME_ZIPFILE}"
-                    zip_workflowfilepath = "${env.WORKSPACE}/${ZIP_WORKFLOW}"
+                    path_postdeployment_zipfile = "${env.WORKSPACE}/${postdeployment_zipfile}"
 
                     println("NAME_ZIPFILE: " + NAME_ZIPFILE)
                     println("ZIP_WORKFLOW: " + ZIP_WORKFLOW)
                     println("path_filestobedeployed: " + path_filestobedeployed)
                     println("path_zipfile: " + path_zipfile)
-                    println("zip_workflowfilepath: " + zip_workflowfilepath)
                 }
             }
         }
@@ -331,21 +284,79 @@ pipeline {
 
                             if (totalRecord == 1) {
                                 objectstatus = jsonContent.response.requestObjects[0].data.attributes.status.values[0].value
-                                println("=========== objecttttt=found====" + objectstatus)
+                                //println("=========== objecttttt=found====" + objectstatus)
                                 if (objectstatus == "Completed" || objectstatus == "Completed with errors" || objectstatus == "Errored") {
                                     taskstatus = true
+                                    println("Task is completed with status: "+objectstatus+" \nMoving to Post-Deployment.")
                                 }
                             } else {
-                                statusDetail1msg = jsonContent.response.statusDetail.messages[0].message
-                                println("===========no objecttttt=====" + statusDetail1msg)
+                                //statusDetail1msg = jsonContent.response.statusDetail.messages[0].message
+                                println("===========no objecttttt found. exiting current stage.=====" + statusDetail1msg)
+                                taskstatus=true
                             }
                         }
 
                         if (!taskstatus) {
+                            println("Task is in progress. Re-checking in 30 seconds.")
                             sleep(30)
                         }
                     }
                 }
+            }
+        }
+
+        stage('Post Deployment Stage'){
+            steps{
+                script {
+                    println("Checking for files for Post Deployment")
+
+                    def postdeploymentfilesObject = new File(path_postdeploymentfiles)
+                    def postdeploymentFileJSONObject = new JsonSlurperClassic().parse(postdeploymentfilesObject)
+
+                    def postdeploymentFilenamesString = postdeploymentFileJSONObject.filename
+
+                    println("postdeploymentFilenamesString: " + postdeploymentFilenamesString)
+
+                    if(postdeploymentFilenamesString.size()>0){
+                        if (postdeploymentFilenamesString.size() > 1) {
+                            // The string contains a comma
+                            for (int i = 0; i < postdeploymentFilenamesString.size(); i++) {
+                                if (i >= 1) {
+                                    postdeploymentfile += ","
+                                }
+                                postdeploymentFilenamesString[i].trim().replaceAll("\\[|\\]", "")
+                                postdeploymentfile += "'${env.WORKSPACE}" + "\\" + postdeploymentFilenamesString[i] + "'"
+                            }
+                            println("Final post deployment files: " + postdeploymentfile)
+                        } else {
+                            // The string does not contain a comma
+                            // Assuming postdeploymentFilenamesString is an ArrayList, extract a string element
+                            String filenamesString = postdeploymentFilenamesString.get(0)
+
+                            // Trim leading and trailing whitespace, and remove square brackets
+                            filenamesString = filenamesString.trim().replaceAll("\\[|\\]", "")
+                            postdeploymentfile = "'${env.WORKSPACE}" + "\\" + filenamesString + "'"
+                            println("No comma present" + postdeploymentfile)
+                        }
+                    }
+                    else{
+                        println("No files mentioned in postdeploymentconfig.json. Skipping post-deployment.")
+                        dopostdeployment=false
+                    }
+
+                    println("Final included files: " + postdeploymentfile)
+                    println("Filenames processed successfully... Moving to zipping..")
+
+                    bat """
+                    powershell.exe -Command "if (Test-Path '${path_postdeployment_zipfile}') { Remove-Item '${path_postdeployment_zipfile}' }"
+                    powershell.exe -Command "Compress-Archive -Path @(${postdeploymentfile}) -DestinationPath '${path_postdeployment_zipfile}'"
+                    """
+                    if (!fileExists(path_postdeployment_zipfile)) {
+                        error("Failed to create the zip file.")
+                    } else {
+                        println("Files zipped successfully...")
+                    }
+                }                
             }
         }
 
