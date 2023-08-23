@@ -285,7 +285,7 @@ pipeline {
                             if (totalRecord == 1) {
                                 objectstatus = jsonContent.response.requestObjects[0].data.attributes.status.values[0].value
                                 //println("=========== objecttttt=found====" + objectstatus)
-                                if (objectstatus == "Completed" || objectstatus == "Completed with errors" || objectstatus == "Errored") {
+                                if (objectstatus == "Completed" || objectstatus == "Completed With Errors" || objectstatus == "Errored") {
                                     taskstatus = true
                                     println("Task is completed with status: "+objectstatus+" \nMoving to Post-Deployment.")
                                 }
