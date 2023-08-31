@@ -44,8 +44,10 @@ def parameters
 
 
 @NonCPS
-def makeApiCallAndGetResponse(String taskID,Map parameters) {
-    def post = new URL(paramsJson[0].tenanturl+"/api/requesttrackingservice/get").openConnection() as HttpURLConnection
+def makeApiCallAndGetResponse(String taskID) {
+    def paramsJson = readFile(file: "${env.WORKSPACE}/deployment-artifacts/parameters.json")
+    tempparams = readJSON(text: paramsJson)
+    def post = new URL(tempparams[0].tenanturl+"/api/requesttrackingservice/get").openConnection() as HttpURLConnection
     def requestData = '{"params":{"query":{"id":"' + taskID + '","filters":{"typesCriterion":["tasksummaryobject"]}},"fields":{"attributes":["_ALL"],"relationships":["_ALL"]},"options":{"maxRecords":1000}}}'
     def message = '{"message":"this is a message"}'
 
@@ -53,12 +55,12 @@ def makeApiCallAndGetResponse(String taskID,Map parameters) {
     post.setDoOutput(true)
     post.setRequestProperty("Content-Type", "application/zip")
     post.setRequestProperty("x-rdp-version", "8.1")
-    post.setRequestProperty("x-rdp-tenantId", paramsJson[0].xrdptenantid)
+    post.setRequestProperty("x-rdp-tenantId", tempparams[0].xrdptenantid)
     post.setRequestProperty("x-rdp-clientId", "rdpclient")
-    post.setRequestProperty("x-rdp-userId", paramsJson[0].xrdpuserid)
-    post.setRequestProperty("x-rdp-userRoles", paramsJson[0].xrdpuserrole)
-    post.setRequestProperty("auth-client-id", paramsJson[0].authclientid)
-    post.setRequestProperty("auth-client-secret", paramsJson[0].authclientsecret)
+    post.setRequestProperty("x-rdp-userId", tempparams[0].xrdpuserid)
+    post.setRequestProperty("x-rdp-userRoles", tempparams[0].xrdpuserrole)
+    post.setRequestProperty("auth-client-id", tempparams[0].authclientid)
+    post.setRequestProperty("auth-client-secret", tempparams[0].authclientsecret)
 
     post.connect()
 
@@ -273,7 +275,7 @@ pipeline {
                     def responsess
 
                     while (!taskstatus) {
-                        responsess = makeApiCallAndGetResponse(taskID,parameters)
+                        responsess = makeApiCallAndGetResponse(taskID)
 
                         // Process the response
                         println("task_mssage response: " + responsess)
@@ -459,7 +461,7 @@ pipeline {
                     def responsess
 
                     while (!taskstatus) {
-                        responsess = makeApiCallAndGetResponse(taskID,parameters)
+                        responsess = makeApiCallAndGetResponse(taskID)
 
                         // Process the response
                         println("task_mssage response: " + responsess)
