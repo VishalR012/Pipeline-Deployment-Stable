@@ -39,7 +39,7 @@ def path_postdeploymentfiles
 def path_postdeployment_zipfile
 String postdeploymentfile = ""
 def dopostdeployment = true
-def paramsJson
+def parameters
 
 
 
