@@ -44,7 +44,7 @@ def parameters
 
 
 @NonCPS
-def makeApiCallAndGetResponse(String taskID,Map paramsJson) {
+def makeApiCallAndGetResponse(String taskID,Map parameters) {
     def post = new URL(paramsJson[0].tenanturl+"/api/requesttrackingservice/get").openConnection() as HttpURLConnection
     def requestData = '{"params":{"query":{"id":"' + taskID + '","filters":{"typesCriterion":["tasksummaryobject"]}},"fields":{"attributes":["_ALL"],"relationships":["_ALL"]},"options":{"maxRecords":1000}}}'
     def message = '{"message":"this is a message"}'
