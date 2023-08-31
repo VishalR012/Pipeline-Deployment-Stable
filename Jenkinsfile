@@ -39,6 +39,7 @@ def path_postdeploymentfiles
 def path_postdeployment_zipfile
 String postdeploymentfile = ""
 def dopostdeployment = true
+def paramsJson
 
 
 
@@ -88,8 +89,7 @@ def makeApiCallAndGetResponse(String taskID) {
 pipeline {
     agent any
 
-    stages {
-                
+    stages {        
         stage('Path Variables Initialization') {
             steps {
                 script {
@@ -99,6 +99,8 @@ pipeline {
                     path_postdeploymentfiles = "${env.WORKSPACE}/deployment-artifacts/postdeploymentconfig.json"
                     path_zipfile = "${env.WORKSPACE}/${NAME_ZIPFILE}"
                     path_postdeployment_zipfile = "${env.WORKSPACE}/${postdeployment_zipfile}"
+                    def paramsJson = readFile(file: 'parameters.json')
+                    def parameters = readJSON(text: paramsJson)
 
                     println("NAME_ZIPFILE: " + NAME_ZIPFILE)
                     println("ZIP_WORKFLOW: " + ZIP_WORKFLOW)
