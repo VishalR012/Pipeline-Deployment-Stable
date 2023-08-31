@@ -99,7 +99,7 @@ pipeline {
                     path_postdeploymentfiles = "${env.WORKSPACE}/deployment-artifacts/postdeploymentconfig.json"
                     path_zipfile = "${env.WORKSPACE}/${NAME_ZIPFILE}"
                     path_postdeployment_zipfile = "${env.WORKSPACE}/${postdeployment_zipfile}"
-                    def paramsJson = readFile(file: "/deployment-artifacts/parameters.json")
+                    def paramsJson = readFile(file: "${env.WORKSPACE}/deployment-artifacts/parameters.json")
                     parameters = readJSON(text: paramsJson)
 
                     println("NAME_ZIPFILE: " + NAME_ZIPFILE)
