@@ -40,13 +40,13 @@ def path_postdeployment_zipfile
 String postdeploymentfile = ""
 def dopostdeployment = true
 def parameters
+def args_paramsJson
 
 
 
 @NonCPS
-def makeApiCallAndGetResponse(String taskID) {
-    def paramsJson = readFile(file: "${env.WORKSPACE}/deployment-artifacts/parameters.json")
-    tempparams = readJSON(text: paramsJson)
+def makeApiCallAndGetResponse(String taskID, String args_paramsJson) {
+    def tempparams = readJSON(text: paramsJson)
     def post = new URL(tempparams[0].tenanturl+"/api/requesttrackingservice/get").openConnection() as HttpURLConnection
     def requestData = '{"params":{"query":{"id":"' + taskID + '","filters":{"typesCriterion":["tasksummaryobject"]}},"fields":{"attributes":["_ALL"],"relationships":["_ALL"]},"options":{"maxRecords":1000}}}'
     def message = '{"message":"this is a message"}'
@@ -102,6 +102,7 @@ pipeline {
                     path_zipfile = "${env.WORKSPACE}/${NAME_ZIPFILE}"
                     path_postdeployment_zipfile = "${env.WORKSPACE}/${postdeployment_zipfile}"
                     def paramsJson = readFile(file: "${env.WORKSPACE}/deployment-artifacts/parameters.json")
+                    def args_paramsJson=paramsJson
                     parameters = readJSON(text: paramsJson)
 
                     println("NAME_ZIPFILE: " + NAME_ZIPFILE)
@@ -275,7 +276,7 @@ pipeline {
                     def responsess
 
                     while (!taskstatus) {
-                        responsess = makeApiCallAndGetResponse(taskID)
+                        responsess = makeApiCallAndGetResponse(taskID,args_paramsJson)
 
                         // Process the response
                         println("task_mssage response: " + responsess)
@@ -461,7 +462,7 @@ pipeline {
                     def responsess
 
                     while (!taskstatus) {
-                        responsess = makeApiCallAndGetResponse(taskID)
+                        responsess = makeApiCallAndGetResponse(taskID,args_paramsJson)
 
                         // Process the response
                         println("task_mssage response: " + responsess)
