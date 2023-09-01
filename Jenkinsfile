@@ -45,8 +45,8 @@ def args_paramsJson
 
 
 @NonCPS
-def makeApiCallAndGetResponse(String taskID, String args_paramsJson) {
-    def tempparams = readJSON(text: args_paramsJson)
+def makeApiCallAndGetResponse(String taskID, Map args_paramsJson) {
+    def tempparams = args_paramsJson
     def post = new URL(tempparams[0].tenanturl+"/api/requesttrackingservice/get").openConnection() as HttpURLConnection
     def requestData = '{"params":{"query":{"id":"' + taskID + '","filters":{"typesCriterion":["tasksummaryobject"]}},"fields":{"attributes":["_ALL"],"relationships":["_ALL"]},"options":{"maxRecords":1000}}}'
     def message = '{"message":"this is a message"}'
@@ -102,8 +102,8 @@ pipeline {
                     path_zipfile = "${env.WORKSPACE}/${NAME_ZIPFILE}"
                     path_postdeployment_zipfile = "${env.WORKSPACE}/${postdeployment_zipfile}"
                     def paramsJson = readFile(file: "${env.WORKSPACE}/deployment-artifacts/parameters.json")
-                    args_paramsJson=paramsJson
                     parameters = readJSON(text: paramsJson)
+                    args_paramsJson=parameters
 
                     println("NAME_ZIPFILE: " + NAME_ZIPFILE)
                     println("ZIP_WORKFLOW: " + ZIP_WORKFLOW)
