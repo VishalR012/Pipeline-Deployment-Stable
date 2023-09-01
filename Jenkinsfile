@@ -45,7 +45,7 @@ def args_paramsJson
 
 
 @NonCPS
-def makeApiCallAndGetResponse(String taskID, ArrayList args_paramsJson) {
+def makeApiCallAndGetResponse(String taskID,args_paramsJson) {
     def tempparams = args_paramsJson
     def post = new URL(tempparams[0].tenanturl+"/api/requesttrackingservice/get").openConnection() as HttpURLConnection
     def requestData = '{"params":{"query":{"id":"' + taskID + '","filters":{"typesCriterion":["tasksummaryobject"]}},"fields":{"attributes":["_ALL"],"relationships":["_ALL"]},"options":{"maxRecords":1000}}}'
