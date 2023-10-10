@@ -2,8 +2,8 @@
   {
     "tenanturl": "https://etronds.riversand.com",
     "xrdptenantid": "etronds",
-    "xrdpuserid": "etronds.systemadmin@riversand.com",
-    "xrdpuserrole": "systemadmin",
+    "xrdpuserid": "etronds.admin@riversand.com",
+    "xrdpuserrole": "admin",
     "authclientid": "j29DTHa7m7VHucWbHg7VvYA75pUjBopS",
     "authclientsecret": "J7UaRWQgxorI8mdfuu8y0mOLqzlIJo2hM3O4VfhX1PIeoa7CYVX_l0-BnHRtuSWB",
     "deploymenttenant":"DS",
